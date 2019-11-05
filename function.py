@@ -7,8 +7,16 @@ roman_numerals_mapping = {
 
 
 def value_converter(value, denominator):
-    """ Converts the integer value given using the denominator
-    
+    """ 
+    Converts the integer value given using the denominator
+
+    Parameters:
+    value (int): Integer value to convert to arabic equivalent
+    denominator(int): Index to roman numeral mapping.
+
+    Returns:
+    roman_value (string): roman value equivalent for value
+
     >>> [value_converter(number, 100) for number in [1,5,9]]
     ['C', 'D', 'CM']
     >>> [value_converter(number, 10) for number in [1,5,9]]
@@ -35,6 +43,20 @@ def value_converter(value, denominator):
 
 
 def arabic_to_roman_converter(number, denominator=1000):
+    """
+    Converts arabic numbers to roman numerals
+
+    Parameters:
+    number (int): arabic number to convert to roman
+    denominator (int): integer multiple of ten that indexes roman numeral values
+
+    Returns:
+    roman_value (int): roman numeral equivalent for number
+
+
+    >>> [arabic_to_roman_converter(number) for number in [1, 15, 200, 259]]
+    ['I', 'XV', 'CC', 'CCLIX']
+    """
     if denominator == 1:
         return value_converter(number, 1)
     else:
@@ -46,7 +68,14 @@ def arabic_to_roman_converter(number, denominator=1000):
 
 
 def validate_argument(maybe_number):
-    """ Validates arguments to make sure they are valid integers
+    """ 
+    Validates arguments to make sure they are valid integers
+
+    Parameters:
+    maybe_number (int): possible integer value to be validated
+
+    Returns:
+    (value, error) (int, string): tuple that can contain error if validation fails or value if it passes
 
     >>> [validate_argument(maybe_number) for maybe_number in ['10', 'invalid string', '4001']]
     [(10, None), (None, 'Invalid argument, value must be an Integer between 1 and 3999'), (None, 'Invalid argument, value must be an Integer between 1 and 3999')]
@@ -62,6 +91,12 @@ def validate_argument(maybe_number):
 
 
 def collect_user_argument():
+    """
+    Collects user input
+
+    Returns:
+    value (int): user value after validation and type casting
+    """
     number = raw_input(prompt_message)
     value, error = validate_argument(number)
     if error:
@@ -72,6 +107,9 @@ def collect_user_argument():
 
 
 if __name__ == '__main__':
+    import doctest
+    doctest.testmod()
+
     prompt_message = "Enter a number, e.g 1, 10, 222: "
     rerun_message = "Convert another number? (Y/n): "
     playing = True
